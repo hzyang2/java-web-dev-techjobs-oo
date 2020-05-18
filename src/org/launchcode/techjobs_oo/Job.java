@@ -19,7 +19,7 @@ public class Job {
         nextId++;
     }
 
-    public Job(int id, String name, Employer employer, Location location, PositionType positionType, CoreCompetency coreCompetency) {
+    public Job(String name, Employer employer, Location location, PositionType positionType, CoreCompetency coreCompetency) {
         this();
         this.name = name;
         this.employer = employer;
@@ -37,12 +37,7 @@ public class Job {
         if (!(object instanceof Job)) return false;
         if (!super.equals(object)) return false;
         Job job = (Job) object;
-        return getId() == job.getId() &&
-                getName().equals(job.getName()) &&
-                getEmployer().equals(job.getEmployer()) &&
-                getLocation().equals(job.getLocation()) &&
-                getPositionType().equals(job.getPositionType()) &&
-                getCoreCompetency().equals(job.getCoreCompetency());
+        return getId() == job.getId();
     }
 
     public int hashCode() {
