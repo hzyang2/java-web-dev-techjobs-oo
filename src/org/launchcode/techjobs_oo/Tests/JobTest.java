@@ -47,51 +47,84 @@ public class JobTest {
         //NOTE: We expect the id field to be different, so the equals() method should return false.
         assertFalse(testJobOne.equals(testJobTwo)); //What property is different? (When I say "property", I mean any field returned by a getter.)
     }
-}
-
 
     //5) Use TDD to Build The toString Method
     //Create First Test for toString
+    @Test
+    public void testToString() {
+        Job testJob = new Job("Product tester", new Employer("ACME"), new Location("Desert"), new PositionType("Quality control"), new CoreCompetency("Persistence"));
+        String expectedString = "ID: " + testJob.getId()
+                + "\nName: " + testJob.getName()
+                + "\nEmployer: " + testJob.getEmployer()
+                + "\nLocation: " + testJob.getLocation()
+                + "\nPosition Type: " + testJob.getPositionType()
+                + "\nCore Competency: " + testJob.getCoreCompetency();
+        assertEquals(expectedString, testJob.toString());
+    }
 
+    @Test
+    public void testToStringMissingName() {
+        //3. Use a setter method on the Job object to change the name, making it empty:
+        testJob.setName(null); //This is a different way, perhaps what they mean by "empty".
+        //Now change expectedString to reflect what we expect to see:
+        String expectedStringTwo =  "ID: " + testJob.getId()
+                + "\nName: " + "Data not available"
+                + "\nEmployer: " + testJob.getEmployer()
+                + "\nLocation: " + testJob.getLocation()
+                + "\nPosition Type: " + testJob.getPositionType()
+                + "\nCore Competency: " + testJob.getCoreCompetency();
+        assertEquals(expectedStringTwo, testJob.toString());
+    }
 
+    @Test
+    public void testToStringMissingEmployer() {
+        testJob.setEmployer(null); //This is a different way, perhaps what they mean by "empty".
+        //Now change expectedString to reflect what we expect to see:
+        String expectedStringTwo =  "ID: " + testJob.getId()
+                + "\nName: " + testJob.getName()
+                + "\nEmployer: " + "Data not available"
+                + "\nLocation: " + testJob.getLocation()
+                + "\nPosition Type: " + testJob.getPositionType()
+                + "\nCore Competency: " + testJob.getCoreCompetency();
+        assertEquals(expectedStringTwo, testJob.toString());
+    }
 
+    @Test
+    public void testToStringMissingLocation() {
+        testJob.setLocation(null);
+        //Now change expectedString to reflect what we expect to see:
+        String expectedStringTwo =  "ID: " + testJob.getId()
+                + "\nName: " + testJob.getName()
+                + "\nEmployer: " + testJob.getEmployer()
+                + "\nLocation: " + "Data not available"
+                + "\nPosition Type: " + testJob.getPositionType()
+                + "\nCore Competency: " + testJob.getCoreCompetency();
+        assertEquals(expectedStringTwo, testJob.toString());
+    }
 
-    //Test the Empty Constructor
-//    Job test_job_one;
-//    Job test_job_two;
-//    Job test_job_three;
-//
-//    @BeforeEach
-//    public void setUp() {
-//         test_job_one = new Job("Bob", new Employer("Hardies"), new Location("Dallas"), new PositionType("NightShift"), new CoreCompetency("Sweeping"));
-//         test_job_two = new Job("Bob", new Employer("Hardies"), new Location("Dallas"), new PositionType("NightShift"), new CoreCompetency("Sweeping"));
-//         test_job_three = new Job("Bob", new Employer(), new Location("Dallas"), new PositionType(), new CoreCompetency("Sweeping"));
-//    }
-//    @AfterEach
-//    void tearDown() {
-//    }
-//    @Test
-//    public void IdShouldIncrement() {
-//
-//
-//        assertFalse(test_job_one.getId() == test_job_two.getId());
-//        assertTrue(test_job_two.getId() == test_job_one.getId() + 1);
-//    }
-//    @Test
-//    public void testJobsForEquality() {
-//
-//        assertFalse(test_job_one.equals(test_job_two));
-//    }
-//    @Test
-//    public void testJobConstructorSetsAllFields() {
-//
-//        assertEquals("Bob" ,test_job_one.getName());
-//        assertEquals("Hardies" , test_job_one.getEmployer().getValue());
-//        assertEquals("Dallas" , test_job_one.getLocation().getValue());
-//        assertEquals("NightShift" ,test_job_one.getPositionType().getValue());
-//        assertEquals("Sweeping", test_job_one.getCoreCompetency().getValue());
-//    }
+    @Test
+    public void testToStringMissingPositionType() {
+        testJob.setPositionType(null);
+        //Now change expectedString to reflect what we expect to see:
+        String expectedStringTwo =  "ID: " + testJob.getId()
+                + "\nName: " + testJob.getName()
+                + "\nEmployer: " + testJob.getEmployer()
+                + "\nLocation: " + testJob.getLocation()
+                + "\nPosition Type: " + "Data not available"
+                + "\nCore Competency: " + testJob.getCoreCompetency();
+        assertEquals(expectedStringTwo, testJob.toString());
+    }
 
-
-
-
+    @Test
+    public void testToStringMissingCoreCompetency() {
+        testJob.setCoreCompetency(null);
+        //Now change expectedString to reflect what we expect to see:
+        String expectedStringTwo =  "ID: " + testJob.getId()
+                + "\nName: " + testJob.getName()
+                + "\nEmployer: " + testJob.getEmployer()
+                + "\nLocation: " + testJob.getLocation()
+                + "\nPosition Type: " + testJob.getPositionType()
+                + "\nCore Competency: " + "Data not available";
+        assertEquals(expectedStringTwo, testJob.toString());
+    }
+}
